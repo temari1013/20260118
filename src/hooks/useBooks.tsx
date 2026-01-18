@@ -1,18 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
-import { Book } from '../../app/pages/list/page'
+import { definitions } from '@/types/api';
 
+type Book = definitions['outputs.BookResponse'];
 
-const fetchBooks = async (): Promise<Array<Book>> => {
-  const response = await fetch('localhost:8081')
+export const fetchBooks = async (): Promise<Array<Book>> => {
+  const response = await fetch('/api/books');
   const data = await response.json()
   return data//.filter((x:  Book) => x.id <= limit)
 }
 
-const useBooks = (limit: number) => {
+export const useBooks = (limit: number) => {
   return useQuery({
     queryKey: ['books', limit],
     queryFn: () => fetchBooks(),
   })
 }
 
-export { useBooks, fetchBooks}
