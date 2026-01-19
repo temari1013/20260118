@@ -1,0 +1,83 @@
+.container {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.input {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #0070f3;
+}
+
+.button {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #0051a2;
+}
+
+.button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ダークモード対応 (globals.cssの変数を利用) */
+@media (prefers-color-scheme: dark) {
+  .container {
+    border-color: #333;
+  }
+  .label {
+    color: #ccc;
+  }
+  .input {
+    background-color: #1a1a1a;
+    border-color: #444;
+    color: white;
+  }
+}
