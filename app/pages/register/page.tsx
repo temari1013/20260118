@@ -2,6 +2,7 @@
 import { useCreateBook } from '@/hooks/useBooks'
 import { FormEvent } from 'react'
 import styles from './page.module.css'
+import { definitions } from '@/types/api'
 
 export default function BookRegisterPage() {
     const mutation = useCreateBook()
@@ -10,15 +11,26 @@ export default function BookRegisterPage() {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
         
+        const isbn = formData.get('isbn') as string
         const title = formData.get('title') as string
+        const title_kana = formData.get('title_kana') as string
         const author = formData.get('author') as string
-
+        const author_kana = formData.get('author_kana') as string
+        const description = formData.get('description') as string
+        const state = formData.get('state') as definitions["inputs.BookStatus"]
         mutation.mutate(
-            { title, author },
+            { 
+                isbn, 
+                title, 
+                title_kana, 
+                author, 
+                author_kana, 
+                description ,
+                state,
+            },
             {
                 onSuccess: () => {
                     console.log('登録成功！')
-                   
                 }
             }
         )
@@ -56,6 +68,11 @@ export default function BookRegisterPage() {
             <div className={styles.formGroup}>
                 <label className={styles.label}>説明</label>
                 <input type="text" name="description" className={styles.input} />
+            </div>
+
+            <div className={styles.formGroup}>
+                <label className={styles.label}>状態</label>
+                <input type="text" name="state" className={styles.input} />
             </div>
 
             <button

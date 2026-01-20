@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+  "generate:types": "openapi-typescript /Users/temari/mydev/20251101/docs/swagger.yaml -o ./src/types/api.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.19",

@@ -1,13 +1,19 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { definitions } from '@/types/api';
 
-type Book = definitions['outputs.BookResponse'];
+type BookResponse = definitions['outputs.BookResponse'];
+export type Book = Omit<BookResponse, 'created_at'> & {
+  created_at?: Date;
+};
 
 export const fetchBooks = async (): Promise<Array<Book>> => {
   const response = await fetch('/api/books');
-  const data = await response.json()
-  return data//.filter((x:  Book) => x.id <= limit)
-}
+  const data: Array<BookResponse> = await response.json();
+  return data.map((book) => ({
+    ...book,
+    created_at: book.created_at ? new Date(book.created_at) : undefined,
+  }));
+};
 
 export const useBooks = () => {
   return useQuery({

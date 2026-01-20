@@ -46,22 +46,30 @@ export interface paths {
 
 export interface definitions {
   "inputs.Book": {
-    author?: string;
+    author: string;
     author_kana?: string;
     description?: string;
     isbn?: string;
-    title?: string;
+    state?: definitions["inputs.BookStatus"];
+    title: string;
     title_kana?: string;
   };
+  /** @enum {string} */
+  "inputs.BookStatus": "default" | "damage" | "lending" | "loss";
   "outputs.BookResponse": {
     author?: string;
     author_kana?: string;
+    created_at?: string;
     description?: string;
     id?: number;
     isbn?: string;
+    /** @description Tags        []int  `json:"tags"` */
+    state?: definitions["outputs.BookStatus"];
     title?: string;
     title_kana?: string;
   };
+  /** @enum {string} */
+  "outputs.BookStatus": "default" | "damage" | "lending" | "loss";
 }
 
 export interface operations {}

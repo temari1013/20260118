@@ -1,5 +1,5 @@
 .container {
-  max-width: 900px;
+  max-width: 100%; /* 横幅を最大限使う */
   margin: 4rem auto;
   padding: 0 2rem;
 }
@@ -10,108 +10,58 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #eaeaea;
+  color: #111111;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* カードの幅を少し広げました */
-  gap: 1.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-.card {
-  padding: 1.5rem;
+/* テーブルを横スクロール可能にするラッパー */
+.tableWrapper {
+  overflow-x: auto;
   border: 1px solid #eaeaea;
   border-radius: 8px;
-  background-color: var(--background);
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-}
-
-.bookHeader {
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.bookTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 0.2rem;
-}
-
-.bookKana {
-  font-size: 0.8rem;
-  color: #888;
-}
-
-.metaRow {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  font-size: 0.95rem;
-}
-
-.label {
-  font-size: 0.75rem;
-  color: #888;
-  font-weight: 600;
-}
-
-.text {
-  color: var(--foreground);
-}
-
-.description {
-  margin-top: auto; /* カードの下部に配置 */
-  padding-top: 0.8rem;
-  border-top: 1px dashed #eaeaea;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap; /* 折り返さず1行で表示 */
   font-size: 0.9rem;
-  color: #666;
-  line-height: 1.5;
+  background-color: #ffffff;
+}
+
+.th {
+  background-color: #f7f7f7;
+  color: #333;
+  font-weight: 700;
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.td {
+  padding: 1rem;
+  border-bottom: 1px solid #eaeaea;
+  color: #111;
+  vertical-align: middle;
+}
+
+.tr:last-child .td {
+  border-bottom: none;
+}
+
+/* 偶数行に背景色をつけて読みやすくする場合（お好みで） */
+.tr:nth-child(even) {
+  background-color: #fafafa;
 }
 
 .message {
   text-align: center;
   padding: 3rem;
-  color: #666;
+  color: #333;
 }
 
 .error {
-  color: #e00;
+  color: #cc0000;
   text-align: center;
   padding: 3rem;
-}
-
-/* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-  .card {
-    border-color: #333;
-    background-color: #111;
-  }
-  .heading {
-    border-color: #333;
-  }
-  .bookHeader {
-    border-color: #222;
-  }
-  .description {
-    border-color: #333;
-    color: #aaa;
-  }
-  .label {
-    color: #666;
-  }
-  .bookKana {
-    color: #666;
-  }
 }
