@@ -25,8 +25,9 @@ export const useBooks = () => {
 const createBook = async (newBook: Book) => {
   const res = await fetch('/api/books', {
     method: 'POST',
+    credentials: 'include',
     headers: {
-      'Content-Type': 'application/json', // JSONとして送る宣言
+      'Content-Type': 'application/json', 
     },
    body: JSON.stringify([ newBook ]),
   });

@@ -1,10 +1,13 @@
 'use client'
 import { useCreateBook } from '@/hooks/useBooks'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 import styles from './page.module.css'
 import { definitions } from '@/types/api'
+import { GoogleLoginButton, type UserData } from '@/components/GoogleLoginButton'
+
 
 export default function BookRegisterPage() {
+    const [userData, setUserData] = useState<UserData | null>(null)
     const mutation = useCreateBook()
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -38,7 +41,15 @@ export default function BookRegisterPage() {
 
     return (
     <main className={styles.container}>
-        <h1 className={styles.title}>書籍登録</h1>
+        {!userData ? (
+            <div className={styles.loginSection}>
+                <h2>ログインしてください</h2>
+                <GoogleLoginButton handleValueChange={setUserData} />
+            </div>
+        ) : (
+            <>
+                <p>ログイン中: {userData.email}</p>
+                <h1 className={styles.title}>書籍登録</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
                 <label className={styles.label}>ISBNコード</label>
@@ -82,7 +93,9 @@ export default function BookRegisterPage() {
             >
                 {mutation.isPending ? '送信中...' : '登録する'}
             </button>
-      </form>
+        </form>
+        </>
+        )}
     </main>
   );
 }
