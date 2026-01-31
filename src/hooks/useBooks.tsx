@@ -25,11 +25,12 @@ export const useBooks = () => {
 const createBook = async (newBook: Book) => {
   const res = await fetch('/api/books', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Content-Type': 'application/json', 
     },
+    credentials: 'include',
    body: JSON.stringify([ newBook ]),
+   
   });
 
   if (!res.ok) {

@@ -12,12 +12,14 @@ export const GoogleLoginButton = ({ handleValueChange }: GoogleLoginButtonProps)
   // ログイン成功時の処理
    const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
     // バックエンドへのリクエスト
-    fetch("http://localhost:8081/authorization", {
+    fetch("http://localhost:8081/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${credentialResponse.credential}`,
+        //Authorization: `Bearer ${credentialResponse.credential}`,
       },
+      credentials: 'include',
+       body: JSON.stringify({ token: credentialResponse.credential }),
     })
       .then((response) => response.json())
       .then((data: UserData) => {
