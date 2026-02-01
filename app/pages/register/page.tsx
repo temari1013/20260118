@@ -16,19 +16,15 @@ export default function BookRegisterPage() {
         
         const isbn = formData.get('isbn') as string
         const title = formData.get('title') as string
-        const title_kana = formData.get('title_kana') as string
         const author = formData.get('author') as string
-        const author_kana = formData.get('author_kana') as string
         const description = formData.get('description') as string
         const state = formData.get('state') as definitions["inputs.BookStatus"]
         mutation.mutate(
             { 
                 isbn, 
                 title, 
-                title_kana, 
                 author, 
-                author_kana, 
-                description ,
+                description,
                 state,
             },
             {
@@ -62,18 +58,8 @@ export default function BookRegisterPage() {
             </div>
 
             <div className={styles.formGroup}>
-                <label className={styles.label}>書籍名（カナ）</label>
-                <input type="text" name="title_kana" className={styles.input} />
-            </div>
-
-            <div className={styles.formGroup}>
                 <label className={styles.label}>著者名</label>
                 <input type="text" name="author" className={styles.input} required />
-            </div>
-
-            <div className={styles.formGroup}>
-                <label className={styles.label}>著者名（カナ）</label>
-                <input type="text" name="author_kana" className={styles.input} />
             </div>
 
             <div className={styles.formGroup}>
