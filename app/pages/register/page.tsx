@@ -4,12 +4,11 @@ import { FormEvent, useState } from 'react'
 import styles from './page.module.css'
 import { definitions } from '@/types/api'
 import { GoogleLoginButton, type UserData } from '@/components/GoogleLoginButton'
-
+import toast, { Toaster } from "react-hot-toast";
 
 export default function BookRegisterPage() {
     const [userData, setUserData] = useState<UserData | null>(null)
     const mutation = useCreateBook()
-
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
@@ -29,9 +28,13 @@ export default function BookRegisterPage() {
             },
             {
                 onSuccess: () => {
-                    console.log('登録成功！')
-                }
-            }
+                    toast.success("登録に成功しました");
+                },
+                onError: (error) => {
+                    toast.error("登録に失敗しました。");
+                    console.error("エラー:", error);
+                },
+            },
         )
     }
 
@@ -76,9 +79,14 @@ export default function BookRegisterPage() {
                 type="submit"
                 disabled={mutation.isPending}
                 className={styles.button}
+                onClick={async () => { 
+              toast.error();
+            }}
             >
                 {mutation.isPending ? '送信中...' : '登録する'}
+
             </button>
+
         </form>
         </>
         )}

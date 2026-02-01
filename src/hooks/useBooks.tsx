@@ -34,7 +34,7 @@ const createBook = async (newBook: Book) => {
   });
 
   if (!res.ok) {
-    throw new Error('登録に失敗しました');
+    return res.status
   }
   return res.json();
 };
@@ -44,7 +44,6 @@ export const useCreateBook = ()=>{
   return useMutation({
     mutationFn: createBook, 
     onSuccess: () => {
-      
       queryClient.invalidateQueries({ queryKey: ['books'] });
     },
   });

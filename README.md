@@ -1,6 +1,11 @@
 2026-01-18
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+
+ pm2 stop hogehoge /all 
+ git pull
+ npm run build
+ pm2 restart hogehoge /all
 ## Getting Started
 
 First, run the development server:
