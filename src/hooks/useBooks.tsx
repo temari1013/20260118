@@ -23,7 +23,7 @@ export const useBooks = () => {
 }
 
 const createBook = async (newBook: Book) => {
-  const res = await fetch('/api/books', {
+  const res = await fetch('https://books-backend.shimaena.ga/books', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json', 
