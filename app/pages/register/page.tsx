@@ -79,12 +79,8 @@ export default function BookRegisterPage() {
                 type="submit"
                 disabled={mutation.isPending}
                 className={styles.button}
-                onClick={async () => { 
-              toast.error();
-            }}
             >
                 {mutation.isPending ? '送信中...' : '登録する'}
-
             </button>
 
         </form>
