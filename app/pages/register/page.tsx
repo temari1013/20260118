@@ -82,7 +82,7 @@ export default function BookRegisterPage() {
             >
                 {mutation.isPending ? '送信中...' : '登録する'}
             </button>
-
+ <Toaster position="bottom-center" />
         </form>
         </>
         )}
