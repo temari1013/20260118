@@ -12,7 +12,7 @@ export const GoogleLoginButton = ({ handleValueChange }: GoogleLoginButtonProps)
   // ログイン成功時の処理
    const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
     // バックエンドへのリクエスト
-    fetch("http://localhost:8081/login", {
+    fetch("https://books-backend.shimaena.ga/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

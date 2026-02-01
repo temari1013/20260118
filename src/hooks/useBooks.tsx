@@ -7,7 +7,7 @@ export type Book = Omit<BookResponse, 'created_at'> & {
 };
 
 export const fetchBooks = async (): Promise<Array<Book>> => {
-  const response = await fetch('/api/books');
+  const response = await fetch('https://books-backend.shimaena.ga/books');
   const data: Array<BookResponse> = await response.json();
   return data.map((book) => ({
     ...book,
