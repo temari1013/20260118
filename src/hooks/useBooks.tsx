@@ -7,7 +7,10 @@ export type Book = Omit<BookResponse, 'created_at'> & {
 };
 
 export const fetchBooks = async (): Promise<Array<Book>> => {
-  const response = await fetch('https://books-backend.shimaena.ga/books');
+  const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
+    ? 'https://books-backend.shimaena.ga' 
+    : 'http://localhost:8081';
+  const response = await fetch(`${apiUrl}/books`);
   const data: Array<BookResponse> = await response.json();
   return data.map((book) => ({
     ...book,
@@ -23,7 +26,10 @@ export const useBooks = () => {
 }
 
 const createBook = async (newBook: Book) => {
-  const res = await fetch('https://books-backend.shimaena.ga/books', {
+  const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
+    ? 'https://books-backend.shimaena.ga' 
+    : 'http://localhost:8081';
+  const res = await fetch(`${apiUrl}/books`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json', 
@@ -34,7 +40,7 @@ const createBook = async (newBook: Book) => {
   });
 
   if (!res.ok) {
-    return res.status
+     throw new Error('登録に失敗しました');
   }
   return res.json();
 };

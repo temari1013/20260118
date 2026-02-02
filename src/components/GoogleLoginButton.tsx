@@ -12,11 +12,13 @@ export const GoogleLoginButton = ({ handleValueChange }: GoogleLoginButtonProps)
   // ログイン成功時の処理
    const handleLoginSuccess = (credentialResponse: CredentialResponse) => {
     // バックエンドへのリクエスト
-    fetch("https://books-backend.shimaena.ga/login", {
+    const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
+      ? process.env.NEXT_PUBLIC_PROD_DOMAIN
+      : process.env.NEXT_PUBLIC_DEV_DOMAIN;
+    fetch(`${apiUrl}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //Authorization: `Bearer ${credentialResponse.credential}`,
       },
       credentials: 'include',
        body: JSON.stringify({ token: credentialResponse.credential }),
@@ -24,7 +26,6 @@ export const GoogleLoginButton = ({ handleValueChange }: GoogleLoginButtonProps)
       .then((response) => response.json())
       .then((data: UserData) => {
         console.log("Email adress: ", data.email);
-        //親要素へユーザーデータを渡す
         handleValueChange(data);
       })
       .catch((error) => {
