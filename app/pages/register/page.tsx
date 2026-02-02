@@ -2,13 +2,22 @@
 import { useCreateBook } from '@/hooks/useBooks'
 import { FormEvent, useState } from 'react'
 import styles from './page.module.css'
-import { definitions } from '@/types/api'
 import { GoogleLoginButton, type UserData } from '@/components/GoogleLoginButton'
 import toast, { Toaster } from "react-hot-toast";
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function BookRegisterPage() {
     const [userData, setUserData] = useState<UserData | null>(null)
     const mutation = useCreateBook()
+    const [state, setState] = React.useState('');
+        const handleChange = (event: SelectChangeEvent) => {
+    setState(event.target.value as string);
+  };
+
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
         const formData = new FormData(event.currentTarget)
@@ -17,7 +26,7 @@ export default function BookRegisterPage() {
         const title = formData.get('title') as string
         const author = formData.get('author') as string
         const description = formData.get('description') as string
-        const state = formData.get('state') as definitions["inputs.BookStatus"]
+        const state = formData.get('state') as "default" | "damage" | "lending" | "loss" | undefined
         mutation.mutate(
             { 
                 isbn, 
@@ -48,7 +57,7 @@ export default function BookRegisterPage() {
         ) : (
             <>
                 <p>ログイン中: {userData.email}</p>
-                <h1 className={styles.title}>書籍登録</h1>
+        <h1 className={styles.title}>書籍登録</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
                 <label className={styles.label}>ISBNコード</label>
@@ -70,13 +79,22 @@ export default function BookRegisterPage() {
                 <input type="text" name="description" className={styles.input} />
             </div>
 
-            <select className={styles.formGroup}>
-                <label className={styles.label}>状態</label>
-                <option value="default">普通</option>
-                <option value="lending">貸出中</option>
-                <option value="damaged">損傷</option>
-                <option value="lost">喪失</option>
-            </select>
+           <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">State</InputLabel>
+                <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={state}
+                    label="State"
+                    name="state"
+                    onChange={handleChange}
+                >
+                    <MenuItem value={"default"}>普通</MenuItem>
+                    <MenuItem value={"damage"}>損傷</MenuItem>
+                    <MenuItem value={"lending"}>貸出中</MenuItem>
+                    <MenuItem value={"loss"}>喪失</MenuItem>
+                </Select>
+            </FormControl>
 
             <button
                 type="submit"
