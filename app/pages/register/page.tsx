@@ -70,10 +70,13 @@ export default function BookRegisterPage() {
                 <input type="text" name="description" className={styles.input} />
             </div>
 
-            <div className={styles.formGroup}>
+            <select className={styles.formGroup}>
                 <label className={styles.label}>状態</label>
-                <input type="text" name="state" className={styles.input} />
-            </div>
+                <option value="default">普通</option>
+                <option value="lending">貸出中</option>
+                <option value="damaged">損傷</option>
+                <option value="lost">喪失</option>
+            </select>
 
             <button
                 type="submit"
@@ -82,7 +85,7 @@ export default function BookRegisterPage() {
             >
                 {mutation.isPending ? '送信中...' : '登録する'}
             </button>
- <Toaster position="bottom-center" />
+                <Toaster position="bottom-center" />
         </form>
         </>
         )}
