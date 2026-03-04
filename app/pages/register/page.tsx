@@ -37,7 +37,7 @@ export default function BookRegisterPage() {
         const title = formData.get('title') as string
         const author = formData.get('author') as string
         const description = formData.get('description') as string
-        const state = formData.get('state') as "default" | "damage" | "lending" | "loss" | undefined
+        const state = formData.get('state') as "default" | "damaged" | "lending" | "lost" | undefined
         mutation.mutate(
             { 
                 isbn, 
