@@ -70,7 +70,7 @@ export interface definitions {
     title_kana?: string;
   };
   /** @enum {string} */
-  "inputs.BookStatus": "default" | "damage" | "lending" | "loss";
+  "inputs.BookStatus": "default" | "damaged" | "lending" | "lost";
   "outputs.BookResponse": {
     author?: string;
     author_kana?: string;
@@ -84,7 +84,7 @@ export interface definitions {
     title_kana?: string;
   };
   /** @enum {string} */
-  "outputs.BookStatus": "default" | "damage" | "lending" | "loss";
+  "outputs.BookStatus": "default" | "damaged" | "lending" | "lost";
   "outputs.TagResponse": {
     id: number;
     name: string;

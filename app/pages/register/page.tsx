@@ -133,9 +133,9 @@ export default function BookRegisterPage() {
                     onChange={handleStateChange}
                 >
                     <MenuItem value={"default"}>普通</MenuItem>
-                    <MenuItem value={"damage"}>損傷</MenuItem>
+                    <MenuItem value={"damaged"}>損傷</MenuItem>
                     <MenuItem value={"lending"}>貸出中</MenuItem>
-                    <MenuItem value={"loss"}>喪失</MenuItem>
+                    <MenuItem value={"lost"}>喪失</MenuItem>
                 </Select>
             </FormControl>
 
