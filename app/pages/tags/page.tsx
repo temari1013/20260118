@@ -76,9 +76,8 @@ export default function TagsPage() {
             {tags && tags.length > 0 ? (
               <div className={styles.tagsList}>
                 {tags.map((tag) => (
-                  <div key={tag.id} className={styles.tagCard}>
-                    <div className={styles.tagName}>{tag.name}</div>
-                    <div className={styles.tagId}>ID: {tag.id}</div>
+                  <div key={tag.id} className={styles.tagDisplay}>
+                    {tag.name}
                   </div>
                 ))}
               </div>

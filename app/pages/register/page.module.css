@@ -67,3 +67,43 @@
   cursor: not-allowed;
 }
 
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.tagBadge {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 8px 16px;
+  border: 2px solid #dee2e6;
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tagBadge:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.tagBadge.selected {
+  background-color: #0070f3;
+  color: white;
+  border-color: #0051a2;
+}
+
+.tagsMessage {
+  color: #666;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.loginSection {
+  text-align: center;
+  padding: 40px;
+}

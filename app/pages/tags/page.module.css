@@ -77,34 +77,19 @@
 }
 
 .tagsList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
-.tagCard {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.tagCard:hover {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-.tagName {
-  font-size: 16px;
-  font-weight: 500;
+.tagDisplay {
+  background-color: #f8f9fa;
   color: #333;
-  margin-bottom: 10px;
-}
-
-.tagId {
-  font-size: 12px;
-  color: #999;
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .message {

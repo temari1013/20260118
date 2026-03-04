@@ -10,8 +10,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Chip from '@mui/material/Chip';
-import Box from '@mui/material/Box';
 
 export default function BookRegisterPage() {
     const [userData, setUserData] = useState<UserData | null>(null)
@@ -24,9 +22,12 @@ export default function BookRegisterPage() {
         setState(event.target.value as string);
     };
 
-    const handleTagsChange = (event: SelectChangeEvent<typeof selectedTags>) => {
-        const value = event.target.value;
-        setSelectedTags(typeof value === 'string' ? value.split(',').map(Number) : value);
+    const handleTagClick = (tagId: number) => {
+        setSelectedTags((prev) => 
+            prev.includes(tagId) 
+                ? prev.filter(id => id !== tagId)
+                : [...prev, tagId]
+        );
     };
 
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -90,37 +91,29 @@ export default function BookRegisterPage() {
                 <input type="text" name="description" className={styles.input} />
             </div>
 
-            <FormControl fullWidth>
-                <InputLabel id="tags-label">タグ</InputLabel>
-                <Select
-                    labelId="tags-label"
-                    id="tags-select"
-                    multiple
-                    value={selectedTags}
-                    label="タグ"
-                    onChange={handleTagsChange}
-                    renderValue={(selected) => (
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                            {selected.map((tagId) => {
-                                const tag = tags?.find(t => t.id === tagId);
-                                return tag ? <Chip key={tagId} label={tag.name} /> : null;
-                            })}
-                        </Box>
-                    )}
-                >
-                    {tagsLoading ? (
-                        <MenuItem disabled>読み込み中...</MenuItem>
-                    ) : tags && tags.length > 0 ? (
-                        tags.map((tag) => (
-                            <MenuItem key={tag.id} value={tag.id}>
+            <div className={styles.formGroup}>
+                <label className={styles.label}>タグ</label>
+                {tagsLoading ? (
+                    <div className={styles.tagsMessage}>読み込み中...</div>
+                ) : tags && tags.length > 0 ? (
+                    <div className={styles.tagsList}>
+                        {tags.map((tag) => (
+                            <button
+                                key={tag.id}
+                                type="button"
+                                onClick={() => handleTagClick(tag.id)}
+                                className={`${styles.tagBadge} ${
+                                    selectedTags.includes(tag.id) ? styles.selected : ''
+                                }`}
+                            >
                                 {tag.name}
-                            </MenuItem>
-                        ))
-                    ) : (
-                        <MenuItem disabled>タグなし</MenuItem>
-                    )}
-                </Select>
-            </FormControl>
+                            </button>
+                        ))}
+                    </div>
+                ) : (
+                    <div className={styles.tagsMessage}>タグがまだ登録されていません</div>
+                )}
+            </div>
 
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">State</InputLabel>
