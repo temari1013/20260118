@@ -42,6 +42,21 @@ export interface paths {
       };
     };
   };
+  "/tags": {
+    /** タグ一覧を取得する */
+    get: {
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["outputs.TagResponse"][];
+        };
+        /** Internal Server Error */
+        500: {
+          schema: { [key: string]: string };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {
@@ -70,6 +85,10 @@ export interface definitions {
   };
   /** @enum {string} */
   "outputs.BookStatus": "default" | "damage" | "lending" | "loss";
+  "outputs.TagResponse": {
+    id: number;
+    name: string;
+  };
 }
 
 export interface operations {}

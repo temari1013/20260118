@@ -1,12 +1,14 @@
 'use client';
 
 import { useBooks } from '@/hooks/useBooks';
+import { useTags } from '@/hooks/useTags';
 import styles from './page.module.css';
 
 
 export default function BookListPage() {
 
   const { data, isLoading, error } = useBooks();
+  const { data: tags } = useTags();
   
   if (isLoading) return <div className={styles.message}>読み込み中...</div>;
   if (error) return <div className={styles.error}>エラーが発生しました</div>;
@@ -24,6 +26,7 @@ export default function BookListPage() {
               <th className={styles.th}>著者</th>
               <th className={styles.th}>状態</th>
               <th className={styles.th}>説明</th>
+              <th className={styles.th}>タグ</th>
               <th className={styles.th}>登録日</th>
             </tr>
           </thead>
@@ -35,7 +38,14 @@ export default function BookListPage() {
                 <td className={styles.td}>{book.author}</td>
                 <td className={styles.td}>{book.state}</td>
                 <td className={styles.td}>{book.description}</td>
-                  <td className={styles.td}>{String(book.created_at)}</td>
+                <td className={styles.td}>
+                  {tags && tags.length > 0 ? (
+                    tags.map(tag => tag.name).join(', ')
+                  ) : (
+                    '—'
+                  )}
+                </td>
+                <td className={styles.td}>{String(book.created_at)}</td>
               </tr>
             ))}
             {/* あとで、個別のidに対してページを生やすことを考えたほうがよいかも*/ }

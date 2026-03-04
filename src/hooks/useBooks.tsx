@@ -10,7 +10,9 @@ export const fetchBooks = async (): Promise<Array<Book>> => {
   const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
     ? 'https://books-backend.shimaena.ga' 
     : 'http://localhost:8081';
-  const response = await fetch(`${apiUrl}/books`);
+  const response = await fetch(`${apiUrl}/books`, {
+    credentials: 'include',
+  });
   const data: Array<BookResponse> = await response.json();
   return data.map((book) => ({
     ...book,

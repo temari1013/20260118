@@ -13,6 +13,9 @@ export default function Home() {
         <Link href="/pages/register" className={styles.linkButton}>
           登録する
         </Link>
+        <Link href="/pages/tags" className={styles.linkButton}>
+          タグ管理
+        </Link>
       </nav>
     </main>
   );
