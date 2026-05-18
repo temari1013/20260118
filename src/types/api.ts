@@ -79,6 +79,7 @@ export interface definitions {
     id?: number;
     isbn?: string;
     /** @description Tags        []int  `json:"tags"` */
+    tags?: number[];
     state?: definitions["outputs.BookStatus"];
     title?: string;
     title_kana?: string;
