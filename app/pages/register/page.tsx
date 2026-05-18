@@ -46,7 +46,7 @@ export default function BookRegisterPage() {
                 author, 
                 description,
                 state,
-                tags: selectedTags,
+                tag_ids: selectedTags,
             },
             {
                 onSuccess: () => {
