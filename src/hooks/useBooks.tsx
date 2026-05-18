@@ -8,6 +8,7 @@ export type Book = Omit<BookResponse, 'created_at'> & {
 };
 
 export const fetchBooks = async (): Promise<Array<Book>> => {
+
   const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
     ? 'https://books-backend.shimaena.ga' 
     : 'http://localhost:8081';
@@ -29,6 +30,7 @@ export const useBooks = () => {
 }
 
 const createBook = async (newBook: Book) => {
+  console.log(newBook);
   const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
     ? 'https://books-backend.shimaena.ga' 
     : 'http://localhost:8081';
