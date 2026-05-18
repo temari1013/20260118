@@ -80,7 +80,7 @@ export interface definitions {
     id?: number;
     isbn?: string;
     /** @description Tags        []int  `json:"tags"` */
-    tags?: number[];
+    tags?: Array<{id: number; name: string}>;
     state?: definitions["outputs.BookStatus"];
     title?: string;
     title_kana?: string;

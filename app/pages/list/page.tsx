@@ -40,7 +40,7 @@ export default function BookListPage() {
                 <td className={styles.td}>{book.description}</td>
                 <td className={styles.td}>
                   {book.tags && book.tags.length > 0 ? (
-                    tags && book.tags.map(tagId => tags.find(tag => tag.id === tagId)?.name).filter(Boolean).join(', ')
+                    book.tags.map(tag => tag.name).join(', ')
                   ) : (
                     '—'
                   )}

@@ -30,7 +30,6 @@ export const useBooks = () => {
 }
 
 const createBook = async (newBook: Book) => {
-  console.log(newBook);
   const apiUrl = process.env.NEXT_PUBLIC_MODE === 'prod' 
     ? 'https://books-backend.shimaena.ga' 
     : 'http://localhost:8081';
