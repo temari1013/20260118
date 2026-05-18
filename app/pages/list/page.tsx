@@ -8,11 +8,11 @@ import styles from './page.module.css';
 export default function BookListPage() {
 
   const { data, isLoading, error } = useBooks();
-  const { data: tags } = useTags();
+  const { data: tags , isLoading: isLoading2} = useTags();
   
-  if (isLoading) return <div className={styles.message}>読み込み中...</div>;
+  if (isLoading || isLoading2) return <div className={styles.message}>読み込み中...</div>;
   if (error) return <div className={styles.error}>エラーが発生しました</div>;
-
+  console.log(tags);
   return (
     <main className={styles.container}>
       <h1 className={styles.heading}>書籍一覧</h1>
