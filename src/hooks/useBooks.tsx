@@ -4,6 +4,7 @@ import { definitions } from '@/types/api';
 type BookResponse = definitions['outputs.BookResponse'];
 export type Book = Omit<BookResponse, 'created_at'> & {
   created_at?: Date;
+  tags?: number[];
 };
 
 export const fetchBooks = async (): Promise<Array<Book>> => {
