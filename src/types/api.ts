@@ -66,6 +66,7 @@ export interface definitions {
     description?: string;
     isbn?: string;
     state?: definitions["inputs.BookStatus"];
+    tags?: number[];
     title: string;
     title_kana?: string;
   };
