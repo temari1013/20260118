@@ -54,6 +54,14 @@
   background-color: #fafafa;
 }
 
+.lostRow {
+  background-color: #e5e7eb;
+}
+
+.lostRow .td {
+  color: #6b7280;
+}
+
 .message {
   text-align: center;
   padding: 3rem;

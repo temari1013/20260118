@@ -93,6 +93,9 @@ export interface definitions {
   };
 }
 
-export interface operations {}
+/*export interface operations {
+
+}
 
 export interface external {}
+*/

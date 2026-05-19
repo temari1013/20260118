@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { useBooks } from '@/hooks/useBooks';
 import { useTags } from '@/hooks/useTags';
 import styles from './page.module.css';
@@ -9,6 +10,13 @@ export default function BookListPage() {
 
   const { data, isLoading, error } = useBooks();
   const { data: tags , isLoading: isLoading2} = useTags();
+  const sortedBooks = useMemo(() => {
+    return [...(data ?? [])].sort((a, b) => {
+      if (a.state === 'lost' && b.state !== 'lost') return 1;
+      if (a.state !== 'lost' && b.state === 'lost') return -1;
+      return 0;
+    });
+  }, [data]);
   
   if (isLoading || isLoading2) return <div className={styles.message}>読み込み中...</div>;
   if (error) return <div className={styles.error}>エラーが発生しました</div>;
@@ -31,8 +39,11 @@ export default function BookListPage() {
             </tr>
           </thead>
           <tbody>
-            {data?.map((book) => (
-              <tr key={book.id} className={styles.tr}>
+            {sortedBooks.map((book) => (
+              <tr
+                key={book.id}
+                className={`${styles.tr} ${book.state === 'lost' ? styles.lostRow : ''}`}
+              >
                 <td className={styles.td}>{book.isbn}</td>
                 <td className={styles.td}>{book.title}</td>
                 <td className={styles.td}>{book.author}</td>
